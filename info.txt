@@ -1,0 +1,26 @@
+creamos una carperta
+entramos 
+craamos un entorno virtua con "py -m venv <nombre entorno virtual>"
+activar el entorno virtual con ". <nombre entorno virtual>/Scripts/activate"
+pip install django
+
+para probar si django estaba instalado creamos un requirements.txt
+pip freeze >> requirements.txt
+
+crear un proyecto con
+django-admin startproject <nombre del proyecto>
+
+<nombre del proyecto>
+    | -> <nombre del proyecto>
+    | -> manage.py
+    | -> venv
+    | -> requirements.txt
+
+generar la base de datos con la config base de django
+py manage.py migrate
+
+luego levantamos el servidor
+py manage.py runserver
+
+se creo .gitignore para ignorar carpetas o 
+archivos con info que no queremos pasarles a otros
