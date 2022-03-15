@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'indice/index.html' %}
+
+{% block bloque_head %}
+    <title>Mi plantilla</title>
+{% endblock bloque_head %}
+
+{% comment %} {% block header_index %}
+    <header class="masthead">Soy otro header</header>
+{% endblock %} {% endcomment %}
+
+{% block pruebaTemplate %}
+
+    {% block bloque_de_plantilla %}
+    {% endblock bloque_de_plantilla %}
+    
     Mi plantilla la mas vacia
 
     {% if nombre_largo < 5 %}
@@ -23,6 +29,4 @@
     {% for valor in lista %}
         <p style="color: red;">{{valor}}</p>
     {% endfor %}
-
-</body>
-</html>
+{% endblock pruebaTemplate %}
