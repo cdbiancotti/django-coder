@@ -5,6 +5,10 @@
 
 {% block pruebaTemplate %}
 
+    <p>
+        <a href={% url 'profesor_crear' %}>Crear Profesor</a>
+    </p>
+
     {% for profesor in object_list %}
         <li>
             {{profesor}}

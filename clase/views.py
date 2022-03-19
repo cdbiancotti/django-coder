@@ -4,7 +4,7 @@ from clase.models import Curso, Estudiante, Profesor
 from clase.forms import CursoFormulario, BusquedaCurso, EstudianteFormulario
 import random
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic.edit import UpdateView, DeleteView, CreateView
 
 # Create your views here.
 
@@ -119,29 +119,26 @@ def borrar_estudiante(request, id):
 
 # CRUD con CBV
 
-# class Profesor(models.Model):
-#     nombre = models.CharField(max_length=20)
-#     apellido = models.CharField(max_length=30)
-#     email = models.EmailField()
-#     profesión = models.CharField(max_length=30)
-
-
 class ProfesorLista(ListView):
     model = Profesor
-    template_name = '/clase/profesor_list.html'
+    template_name = 'clase/profesor_list.html'
 
 
 class ProfesorDetalle(DetailView):
     model = Profesor
-    template_name = '/clase/profesor_datos.html'
+    template_name = 'clase/profesor_datos.html'
 
+class ProfesorCrear(CreateView):
+    model = Profesor
+    success_url = '/clase/profesores/'
+    fields = ['nombre', 'apellido', 'email', 'profesion']
 
 class ProfesorEditar(UpdateView):
     model = Profesor
-    success_url = '/clase/profesor_list.html'
-    fields = ['nombre', 'apellido', 'email', 'profesión']
+    success_url = '/clase/profesores/'
+    fields = ['nombre', 'apellido', 'email', 'profesion']
 
 
 class ProfesorBorrar(DeleteView):
     model = Profesor
-    success_url = 'clase/profesor_listado'
+    success_url = '/clase/profesores/'
