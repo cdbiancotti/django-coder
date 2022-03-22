@@ -1,8 +1,12 @@
 from django.http import HttpResponse
 import random
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from django.template import loader
+from django.contrib.auth import login as django_login, authenticate
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from .forms import NuestraCreacionUser
+
+# from django.template import loader
 
 
 def inicio(request):
@@ -50,3 +54,40 @@ def mi_plantilla(request):
     # version con render
     return render(request, "indice/mi_plantilla.html", diccionario_de_datos)
     
+def login(request):
+    
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            
+            user = authenticate(username=username, password=password)
+            
+            if user is not None:
+                django_login(request, user)
+                return render(request, 'indice/index.html', {'msj': 'Te logueaste!'})
+            else:
+                return render(request, 'indice/login.html', {'form': form, 'msj': 'No se autentico'})
+            
+        else:
+            return render(request, 'indice/login.html', {'form': form, 'msj': 'datos con formato incorrecto'})
+    else:
+        form = AuthenticationForm()
+        return render(request, 'indice/login.html', {'form': form, 'msj': ''})
+    
+def registrar(request):
+    
+    if request.method == 'POST':
+        form = NuestraCreacionUser(request.POST)
+        
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request, 'indice/index.html', {'msj': f'Se creo el user {username}'})
+        else:
+            return render(request, 'indice/registrar.html', {'form': form, 'msj': ''})
+    
+    form = NuestraCreacionUser()
+    return render(request, 'indice/registrar.html', {'form': form, 'msj': ''})

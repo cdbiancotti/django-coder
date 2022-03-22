@@ -23,11 +23,14 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href={% url 'inicio' %}>Inicio</a>
-                <a class="navbar-brand" href={% url 'mi_plantilla' %}>Mi plantilla</a>
+                {% comment %} <a class="navbar-brand" href={% url 'mi_plantilla' %}>Mi plantilla</a>
                 <a class="navbar-brand" href={% url 'formulario_curso' %}>Formulario</a>
-                <a class="navbar-brand" href={% url 'busqueda_curso' %}>Buscar Curso</a>
+                <a class="navbar-brand" href={% url 'busqueda_curso' %}>Buscar Curso</a> {% endcomment %}
                 <a class="navbar-brand" href={% url 'listado_estudiantes' %}>Estudiantes</a>
                 <a class="navbar-brand" href={% url 'profesor_listado' %}>Profesores</a>
+                <a class="navbar-brand" href={% url 'login' %}>Login</a>
+                <a class="navbar-brand" href={% url 'logout' %}>Logout</a>
+                <a class="navbar-brand" href={% url 'registrar' %}>Registrar</a>
                 {% comment %} <a class="btn btn-primary" href="#signup">Sign Up</a> {% endcomment %}
             </div>
         </nav>
@@ -38,16 +41,13 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-6">
                             <div class="text-center text-white">
-                                <!-- Page heading-->
-                                <h1 class="mb-5">Bienvenidos!</h1>
-                                <!-- Signup form-->
-                                <!-- * * * * * * * * * * * * * * *-->
-                                <!-- * * SB Forms Contact Form * *-->
-                                <!-- * * * * * * * * * * * * * * *-->
-                                <!-- This form is pre-integrated with SB Forms.-->
-                                <!-- To make this form functional, sign up at-->
-                                <!-- https://startbootstrap.com/solution/contact-forms-->
-                                <!-- to get an API token!-->
+                                <h1 class="mb-5">
+                                    {% if msj %}
+                                        {{msj}}
+                                    {% else %}
+                                        Bienvenidos!
+                                    {% endif %}
+                                </h1>
                             </div>
                         </div>
                     </div>
