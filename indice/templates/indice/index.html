@@ -28,10 +28,16 @@
                 <a class="navbar-brand" href={% url 'busqueda_curso' %}>Buscar Curso</a> {% endcomment %}
                 <a class="navbar-brand" href={% url 'listado_estudiantes' %}>Estudiantes</a>
                 <a class="navbar-brand" href={% url 'profesor_listado' %}>Profesores</a>
-                <a class="navbar-brand" href={% url 'login' %}>Login</a>
-                <a class="navbar-brand" href={% url 'logout' %}>Logout</a>
-                <a class="navbar-brand" href={% url 'registrar' %}>Registrar</a>
-                {% comment %} <a class="btn btn-primary" href="#signup">Sign Up</a> {% endcomment %}
+                {% if request.user.is_authenticated %}
+                    <a class="navbar-brand" href={% url 'editar' %}>
+                        <img src="{{user_avatar_url}}" alt="Editar imagen" height='40'>
+                        {% comment %} <img src="{{(Avatar.objects.filter(user = request.user.id)[0].image.url)}}" alt="Editar imagen" height='40'> {% endcomment %}
+                    </a>
+                    <a class="navbar-brand" href={% url 'logout' %}>Logout</a>
+                {% else %}
+                    <a class="navbar-brand" href={% url 'login' %}>Login</a>
+                    <a class="navbar-brand" href={% url 'registrar' %}>Registrar</a>
+                {% endif %}
             </div>
         </nav>
         

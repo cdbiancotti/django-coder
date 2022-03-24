@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import inicio, otro_vista, numero_random, numero_del_usuario, mi_plantilla, login, registrar
+from .views import inicio, otro_vista, numero_random, numero_del_usuario, mi_plantilla, login, registrar, editar
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
     path('mi-plantilla/', mi_plantilla, name="mi_plantilla"),
     path('login/', login, name='login'),
     path('registrar/', registrar, name='registrar'),
+    path('editar/', editar, name='editar'),
     path('logout/', LogoutView.as_view(template_name='indice/logout.html'), name='logout'),
 ]
